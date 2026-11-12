@@ -1,0 +1,356 @@
+/* =============================================
+   SaludDigital - Portal Administrativo
+   ============================================= */
+
+/* ===== Auth ===== */
+.admin-auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f0fdfa 0%, #f0f9ff 50%, #f8fafc 100%);
+    padding: 2rem;
+}
+.admin-auth-container {
+    width: 100%;
+    max-width: 420px;
+    animation: fadeIn 0.5s ease;
+}
+.admin-auth-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.admin-auth-logo h1 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--teal-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.admin-auth-logo p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+/* ===== Layout ===== */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: var(--sidebar-width);
+    background: var(--slate-900);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    transition: width var(--transition-normal);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.sidebar-logo {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.sidebar-logo-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--teal-500), var(--primary-600));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+.sidebar-logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+.sidebar-role {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.sidebar-role-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.sidebar-role-label {
+    font-size: 0.7rem;
+    color: var(--slate-400);
+}
+.sidebar-section {
+    padding: 1rem 0;
+}
+.sidebar-section-title {
+    padding: 0 1.5rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--slate-500);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+}
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--slate-400);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-sans);
+    white-space: nowrap;
+}
+.sidebar-item:hover {
+    color: white;
+    background: rgba(255,255,255,0.06);
+}
+.sidebar-item.active {
+    color: white;
+    background: rgba(20, 184, 166, 0.15);
+    border-right: 3px solid var(--teal-500);
+}
+.sidebar-item .si-icon {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+.sidebar-logout {
+    margin-top: auto;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Main content area */
+.admin-main {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+.admin-header {
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 1.5rem;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+}
+.admin-header-title {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+.admin-content {
+    padding: 1.5rem;
+}
+
+/* ===== Stats Grid ===== */
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ===== Charts placeholder ===== */
+.chart-container {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+.chart-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Simple bar chart */
+.bar-chart {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    padding-top: 1rem;
+}
+.bar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+.bar {
+    width: 100%;
+    max-width: 48px;
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(to top, var(--primary-600), var(--primary-400));
+    transition: height 0.6s ease;
+    min-height: 4px;
+}
+.bar-label {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+.bar-value {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Donut chart placeholder */
+.donut-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+.donut-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.donut-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+.donut-label {
+    flex: 1;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+.donut-value {
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+.progress-bar {
+    width: 80px;
+    height: 6px;
+    background: var(--slate-100);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s ease;
+}
+
+/* ===== Two column layout ===== */
+.admin-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ===== Detail panel ===== */
+.detail-panel {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+.detail-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.detail-body {
+    padding: 1.5rem;
+}
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--slate-50);
+    font-size: 0.875rem;
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+.detail-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ===== Filter bar ===== */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+.filter-bar .form-input,
+.filter-bar .form-select {
+    width: auto;
+    min-width: 180px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .admin-sidebar {
+        width: var(--sidebar-collapsed);
+    }
+    .admin-main {
+        margin-left: var(--sidebar-collapsed);
+    }
+    .sidebar-logo-text,
+    .sidebar-role-name,
+    .sidebar-role-label,
+    .sidebar-section-title,
+    .sidebar-item span:not(.si-icon) {
+        display: none;
+    }
+    .sidebar-item { justify-content: center; padding: 0.75rem; }
+    .admin-grid-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .admin-sidebar { display: none; }
+    .admin-main { margin-left: 0; }
+    .admin-stats-grid { grid-template-columns: repeat(2, 1fr); }
+}

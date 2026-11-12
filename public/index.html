@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludDigital — Clínica Privada Digital</title>
+    <meta name="description" content="SaludDigital: Tu clínica privada digital. Agenda citas, consulta resultados y gestiona tu salud desde cualquier lugar.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #0891b2;
+            --primary-dark: #0e7490;
+            --teal: #0f766e;
+            --bg: #f8fafc;
+            --text: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(248, 250, 252, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+            transition: all 0.3s ease;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .nav-logo .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #0891b2, #0f766e);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-link {
+            padding: 0.5rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .nav-link:hover { color: var(--text); background: rgba(14, 116, 144, 0.06); }
+        .nav-btn {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .nav-btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+        }
+        .nav-btn-outline:hover { background: rgba(8, 145, 178, 0.06); }
+        .nav-btn-primary {
+            background: linear-gradient(135deg, #0891b2, #0e7490);
+            color: white;
+            box-shadow: 0 2px 8px rgba(8, 145, 178, 0.3);
+        }
+        .nav-btn-primary:hover {
+            box-shadow: 0 4px 16px rgba(8, 145, 178, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(8, 145, 178, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(15, 118, 110, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-text { animation: slideUp 0.8s ease forwards; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(8, 145, 178, 0.08);
+            border: 1px solid rgba(8, 145, 178, 0.15);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, #0891b2, #0f766e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-btn {
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.25s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        .hero-btn-primary {
+            background: linear-gradient(135deg, #0891b2, #0e7490);
+            color: white;
+            box-shadow: 0 4px 15px rgba(8, 145, 178, 0.35);
+        }
+        .hero-btn-primary:hover {
+            box-shadow: 0 6px 25px rgba(8, 145, 178, 0.45);
+            transform: translateY(-2px);
+        }
+        .hero-btn-secondary {
+            background: white;
+            color: var(--text);
+            border: 1.5px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .hero-btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* Hero illustration */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            animation: slideUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+        .hero-card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            max-width: 440px;
+        }
+        .hero-feature-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+            transition: all 0.3s;
+        }
+        .hero-feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+        .hero-feature-card:nth-child(2) { transform: translateY(20px); }
+        .hero-feature-card:nth-child(2):hover { transform: translateY(16px); }
+        .hero-feature-card:nth-child(4) { transform: translateY(20px); }
+        .hero-feature-card:nth-child(4):hover { transform: translateY(16px); }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .feature-icon.cyan { background: #ecfeff; }
+        .feature-icon.teal { background: #f0fdfa; }
+        .feature-icon.indigo { background: #eef2ff; }
+        .feature-icon.amber { background: #fffbeb; }
+        .hero-feature-card h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .hero-feature-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        .section-header h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+        .section-header p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .feature-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0891b2, #0f766e);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-card .f-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, rgba(8,145,178,0.08), rgba(15,118,110,0.08));
+        }
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== PORTALS SECTION ===== */
+        .portals {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+        }
+        .portals-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .portals-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .portal-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .portal-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 16px 40px rgba(8, 145, 178, 0.12);
+            transform: translateY(-4px);
+        }
+        .portal-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+        .portal-card:first-child .portal-icon {
+            background: linear-gradient(135deg, rgba(8,145,178,0.1), rgba(6,182,212,0.1));
+        }
+        .portal-card:last-child .portal-icon {
+            background: linear-gradient(135deg, rgba(15,118,110,0.1), rgba(20,184,166,0.1));
+        }
+        .portal-card h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+        .portal-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .portal-card ul {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        .portal-card li {
+            padding: 0.4rem 0;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .portal-card li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .portal-btn {
+            display: block;
+            width: 100%;
+            padding: 0.875rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .portal-btn-patient {
+            background: linear-gradient(135deg, #0891b2, #0e7490);
+            color: white;
+            box-shadow: 0 4px 12px rgba(8,145,178,0.3);
+        }
+        .portal-btn-patient:hover { box-shadow: 0 6px 20px rgba(8,145,178,0.4); transform: translateY(-1px); }
+        .portal-btn-admin {
+            background: linear-gradient(135deg, #0f766e, #0d9488);
+            color: white;
+            box-shadow: 0 4px 12px rgba(15,118,110,0.3);
+        }
+        .portal-btn-admin:hover { box-shadow: 0 6px 20px rgba(15,118,110,0.4); transform: translateY(-1px); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 3rem 2rem;
+            background: #0f172a;
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        .footer p {
+            font-size: 0.85rem;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 900px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin: 0 auto 2rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            .portals-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links .nav-link { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav class="nav" id="mainNav">
+        <a href="/" class="nav-logo">
+            <div class="logo-icon">🏥</div>
+            SaludDigital
+        </a>
+        <div class="nav-links">
+            <a href="#features" class="nav-link">Servicios</a>
+            <a href="#portals" class="nav-link">Portales</a>
+            <a href="/patient" class="nav-btn nav-btn-primary">Pacientes</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">🏥 Clínica Privada Digital</div>
+                <h1>Tu salud, <span>conectada digitalmente</span></h1>
+                <p>Agenda citas, consulta resultados de laboratorio, revisa tus medicamentos y gestiona tu historia clínica desde cualquier lugar.</p>
+                <div class="hero-buttons">
+                    <a href="/patient" class="hero-btn hero-btn-primary">Portal del Paciente</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card-grid">
+                    <div class="hero-feature-card">
+                        <div class="feature-icon cyan">📅</div>
+                        <h3>Citas Online</h3>
+                        <p>Agenda con tu especialista favorito</p>
+                    </div>
+                    <div class="hero-feature-card">
+                        <div class="feature-icon teal">🔬</div>
+                        <h3>Resultados</h3>
+                        <p>Laboratorio en tiempo real</p>
+                    </div>
+                    <div class="hero-feature-card">
+                        <div class="feature-icon indigo">📋</div>
+                        <h3>Historia Clínica</h3>
+                        <p>Todo tu historial integrado</p>
+                    </div>
+                    <div class="hero-feature-card">
+                        <div class="feature-icon amber">💊</div>
+                        <h3>Medicamentos</h3>
+                        <p>Prescripciones y seguimiento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Todo lo que necesitas en un solo lugar</h2>
+            <p>SaludDigital integra todos los procesos de tu atención médica en una plataforma moderna y segura</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="f-icon">📅</div>
+                <h3>Gestión de Citas</h3>
+                <p>Agenda, modifica o cancela tus citas médicas. Consulta la disponibilidad de especialistas en tiempo real.</p>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">📋</div>
+                <h3>Historia Clínica Electrónica</h3>
+                <p>Tu información médica centralizada: diagnósticos, tratamientos, antecedentes y evolución clínica.</p>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">🔬</div>
+                <h3>Laboratorio Integrado</h3>
+                <p>Los resultados de tus exámenes llegan directamente a tu perfil y a tu médico tratante.</p>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">💊</div>
+                <h3>Farmacia y Prescripciones</h3>
+                <p>Consulta tus prescripciones activas, dosis e indicaciones. Control de dispensación integrado.</p>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">💳</div>
+                <h3>Facturación</h3>
+                <p>Consulta tus facturas, estado de pagos e historial financiero de manera transparente.</p>
+            </div>
+            <div class="feature-card">
+                <div class="f-icon">🔒</div>
+                <h3>Seguridad de Datos</h3>
+                <p>Autenticación segura, control de acceso por roles y cifrado de información sensible.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTALS -->
+    <section class="portals" id="portals">
+        <div class="portals-container">
+            <div class="section-header">
+                <h2>Portal del Paciente</h2>
+                <p>Accede a tu cuenta para una experiencia personalizada y gestión total de tu salud</p>
+            </div>
+            <div class="portals-grid" style="grid-template-columns: 1fr; max-width: 600px; margin: 0 auto;">
+                <div class="portal-card">
+                    <div class="portal-icon">👤</div>
+                    <h3>Portal del Paciente</h3>
+                    <p>Gestiona tu salud de forma digital. Accede a tus citas, resultados y más.</p>
+                    <ul>
+                        <li>Registrarse y actualizar datos</li>
+                        <li>Agendar y cancelar citas</li>
+                        <li>Consultar resultados de laboratorio</li>
+                        <li>Ver medicamentos e indicaciones</li>
+                        <li>Consultar facturación</li>
+                    </ul>
+                    <a href="/patient" class="portal-btn portal-btn-patient">Ingresar como Paciente</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">🏥 SaludDigital</div>
+        <p>&copy; 2024 SaludDigital — Clínica Privada. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Nav background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 4px 12px rgba(0,0,0,0.06)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card, .portal-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
